@@ -1,0 +1,58 @@
+<mat-toolbar color="primary">Account Management</mat-toolbar>
+
+<style>
+body {
+  background-color: #B3C4D0;
+}
+</style>
+<div *ngIf="auth.user$ | async as user; else login">
+
+<!--
+
+     This is when loged in
+
+  -->
+
+
+    <mat-card style="color: #03191E">
+      <mat-card-title> EZ Accounts </mat-card-title>
+      <mat-card-subtitle> username: {{ user.displayName | json }} </mat-card-subtitle>
+      <mat-card-subtitle> email: {{ user.email | json }} </mat-card-subtitle>
+
+      <mat-card-actions>
+        <button mat-raised-button color="accent" style="margin-top: 20px;padding-left: 50px;padding-right: 50px;"(click)="auth.signOut()">Sign Out</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-toolbar color="primary">
+
+      <mat-toolbar-row>Add an App</mat-toolbar-row>
+    </mat-toolbar>
+    <addcard></addcard>
+    <mat-toolbar color="primary">Applications</mat-toolbar>
+
+    <cards></cards>
+
+
+  </div>
+
+    <!-- this is when not logged in-->
+    <ng-template #login>
+      <h1 style="text-align: center;margin-top: 30px;color: #DB4359">Account organization application</h1>
+      <div style="margin: 50px;color: #03191E">Built around the concept of “boards” and “cards.” Think of it like multiple bulletin boards with sticky notes, except you can
+        assign due dates, color codes, archive and set reminders. You can invite teams to work with, use the calendar feature, and be sure you’ll
+        never miss a deadline because Trello automatically reminds you about anything coming up in the next three days. It’s a great way to make sure
+        you’re getting things done.</div>
+      <br>
+      <button style="margin-left: 750px;padding-left: 50px;padding-right: 50px;" mat-raised-button color="accent" (click)="auth.googleSignin()">Signup</button>
+      <button style="margin-left: 100px;padding-left: 50px;padding-right: 50px;" mat-raised-button color="accent" (click)="auth.googleSignin()">Login</button>
+
+      <br>
+
+
+
+    </ng-template>
+
+
+
+
+<router-outlet></router-outlet>
